@@ -8,7 +8,12 @@
 @endsection
 
 @section('content')
-    {!! $dataTable->table() !!}
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            {!! $dataTable->table(['class' => 'table table-condensed table-striped']) !!}
+        </div>
+    </div>
 
     {{-- FORMULÁRIO DE CADASTRO --}}
     <div class="modal fade" id="modal-form">
