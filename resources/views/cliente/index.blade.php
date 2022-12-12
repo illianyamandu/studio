@@ -2,7 +2,7 @@
 @section('title', 'Lista de clientes')
 
 @section('actions')
-    <a href="" class="btn btn-float has-text" data-toggle="modal" data-target="#modal-form">
+    <a href="{{route('cliente.form')}}" class="btn btn-float has-text">
         <i class="nav-icon fa fa-user"></i><span>Cadastrar<br>Cliente</span>
     </a>
 @endsection
@@ -16,7 +16,7 @@
     </div>
 
     {{-- FORMULÁRIO DE CADASTRO --}}
-    <div class="modal fade" id="modal-form">
+    {{-- <div class="modal fade" id="modal-form">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,6 +83,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     {!! $dataTable->scripts() !!}
 @endsection

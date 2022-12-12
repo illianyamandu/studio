@@ -24,7 +24,7 @@ class ClienteDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            // ->addColumn('action', 'cliente.action')
+            ->addColumn('action', 'cliente.action')
             ->setRowId('id');
     }
 
@@ -66,6 +66,7 @@ class ClienteDataTable extends DataTable
             Column::make('id'),
             Column::make('nome'),
             Column::make('email'),
+            Column::make('action')->searchable(false)->orderable(false)
         ];
     }
 

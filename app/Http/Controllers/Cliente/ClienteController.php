@@ -9,13 +9,17 @@ use App\Utils\FormReturn;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cliente;
 use App\DataTables\ClienteDataTable;
+use Illuminate\Support\Facades\View;
 
 class ClienteController extends Controller
 {
     public function index(ClienteDataTable $dataTable)
     {
-
         return $dataTable->render('cliente.index');
+    }
+
+    public function form(){
+        return view('cliente.form');
     }
 
     public function store(Request $request)
@@ -58,5 +62,10 @@ class ClienteController extends Controller
 
         return redirect()->route('cliente.index');
         // FormReturn::ReturnSuccess('Cliente cadastrado com sucesso!', 200);
+    }
+
+
+    public function formEdit(ClienteDataTable $dataTable, $id){
+        return $dataTable->render('cliente.index');
     }
 }
