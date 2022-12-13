@@ -20,9 +20,8 @@ Route::group(['prefix' => '/'], function () {
     })->name('index');
     Route::group(['prefix' => 'cliente'], function () {
         Route::get('/', [ClienteController::class, 'index'])->name('cliente.index');
-        Route::get('/form', [ClienteController::class, 'form'])->name('cliente.form');
         Route::post('/', [ClienteController::class, 'store'])->name('cliente.create');
-        Route::get('/edit/{cliente_id}', [ClienteController::class, 'formEdit'])->name('cliene.form.edit');
+        Route::patch('/{cliente_id}', [ClienteController::class, 'update'])->name('cliente.update');
     });
 
 });
