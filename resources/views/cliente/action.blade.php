@@ -1,10 +1,25 @@
+<style>
+  .actions{
+    display: flex;
+  }
+
+  .actions a{
+    margin-right: 3px;
+  }
+</style>
+
+<div class="actions">
 <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
     <i class="fa fa-pen"></i>
 </a>
-
-<a class="btn btn-danger btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
-    <i class="fa fa-trash"></i>
-</a>
+<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form">
+  @csrf
+  @method('DELETE')
+  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir">
+      <i class="fa fa-trash"></i>
+  </button>
+</form>
+</div>
 
 <div class="modal fade" id="{{'modal-'.$id}}">
         <div class="modal-dialog modal-lg">

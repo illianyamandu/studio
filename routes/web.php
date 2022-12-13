@@ -22,6 +22,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/', [ClienteController::class, 'index'])->name('cliente.index');
         Route::post('/', [ClienteController::class, 'store'])->name('cliente.create');
         Route::patch('/{cliente_id}', [ClienteController::class, 'update'])->name('cliente.update');
+        Route::delete('/{cliente_id}', [ClienteController::class, 'delete'])->name('cliente.delete');
     });
 
 });

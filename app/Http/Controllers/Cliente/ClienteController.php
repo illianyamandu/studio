@@ -11,6 +11,8 @@ use App\Models\Cliente;
 use App\DataTables\ClienteDataTable;
 use Carbon\Carbon;
 use Exception;
+use GuzzleHttp\Client;
+
 class ClienteController extends Controller
 {
     public function index(ClienteDataTable $dataTable)
@@ -102,6 +104,18 @@ class ClienteController extends Controller
                 'endereco' => $request->endereco,
             ];
             Cliente::findOrFail($id)->update($data);
+            DB::commit();
+            return redirect()->route('cliente.index');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->route('cliente.index');
+        }
+    }
+
+    public function delete($id){
+        try{
+            DB::beginTransaction();
+            Cliente::findOrFail($id)->delete();
             DB::commit();
             return redirect()->route('cliente.index');
         }catch(Exception $e){
