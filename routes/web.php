@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cliente\ClienteController;
+use App\Http\Controllers\Grupo\GrupoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,13 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'cliente'], function () {
         Route::get('/', [ClienteController::class, 'index'])->name('cliente.index');
         Route::post('/', [ClienteController::class, 'store'])->name('cliente.create');
-        Route::patch('/{cliente_id}', [ClienteController::class, 'update'])->name('cliente.update');
+        Route::put('/{cliente_id}', [ClienteController::class, 'update'])->name('cliente.update');
         Route::delete('/{cliente_id}', [ClienteController::class, 'delete'])->name('cliente.delete');
+    });
+
+    Route::group(['prefix' => 'grupo'], function () {
+        Route::get('/', [GrupoController::class, 'index'])->name('grupo.index');
+        Route::post('/', [GrupoController::class, 'store'])->name('grupo.create');
     });
 
 });

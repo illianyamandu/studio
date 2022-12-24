@@ -2,8 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Cliente;
-use App\Models\User;
+use App\Models\Grupo;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,8 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-
-class ClienteDataTable extends DataTable
+class GrupoDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -25,17 +23,17 @@ class ClienteDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'cliente.action')
+            // ->addColumn('action', 'grupo.action')
             ->setRowId('id');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Cliente $model
+     * @param \App\Models\Grupo $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model): QueryBuilder
+    public function query(Grupo $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -48,7 +46,7 @@ class ClienteDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('cliente-table')
+                    ->setTableId('grupo-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -64,10 +62,14 @@ class ClienteDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('Id'),
-            Column::make('nome')->title('Nome'),
-            Column::make('email')->title('E-mail'),
-            Column::make('action')->title('Ações')->searchable(false)->orderable(false)
+           
+            Column::make('id'),
+            Column::make('nome'),
+             // Column::computed('action')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
         ];
     }
 
@@ -78,6 +80,6 @@ class ClienteDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Cliente_' . date('YmdHis');
+        return 'Grupo_' . date('YmdHis');
     }
 }

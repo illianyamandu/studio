@@ -32,7 +32,7 @@
                 </div>
                 <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-6">

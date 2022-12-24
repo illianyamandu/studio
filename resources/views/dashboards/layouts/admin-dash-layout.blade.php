@@ -124,6 +124,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('grupo.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-key"></i>
+                                <p>
+                                    Grupos de acesso
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
