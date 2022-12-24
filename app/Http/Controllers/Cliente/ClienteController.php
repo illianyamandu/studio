@@ -9,9 +9,9 @@ use App\Utils\FormReturn;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cliente;
 use App\DataTables\ClienteDataTable;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
-use GuzzleHttp\Client;
 
 class ClienteController extends Controller
 {
@@ -55,8 +55,8 @@ class ClienteController extends Controller
                 'rg' => $request->rg,
                 'endereco' => $request->endereco,
             ];
-    
-            Cliente::create($data);
+            
+            User::create($data);
             DB::commit();
     
             return redirect()->route('cliente.index');
@@ -103,7 +103,7 @@ class ClienteController extends Controller
                 'rg' => $request->rg,
                 'endereco' => $request->endereco,
             ];
-            Cliente::findOrFail($id)->update($data);
+            User::findOrFail($id)->update($data);
             DB::commit();
             return redirect()->route('cliente.index');
         }catch(Exception $e){
@@ -115,7 +115,7 @@ class ClienteController extends Controller
     public function delete($id){
         try{
             DB::beginTransaction();
-            Cliente::findOrFail($id)->delete();
+            User::findOrFail($id)->delete();
             DB::commit();
             return redirect()->route('cliente.index');
         }catch(Exception $e){
