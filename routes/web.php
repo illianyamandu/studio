@@ -29,6 +29,8 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'grupo'], function () {
         Route::get('/', [GrupoController::class, 'index'])->name('grupo.index');
         Route::post('/', [GrupoController::class, 'store'])->name('grupo.create');
+        Route::put('/{grupo_id}', [GrupoController::class, 'update'])->name('grupo.update');
+        Route::delete('/{grupo_id}', [GrupoController::class, 'delete'])->name('grupo.delete');
     });
 
 });

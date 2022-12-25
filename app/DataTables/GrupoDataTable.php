@@ -23,7 +23,7 @@ class GrupoDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            // ->addColumn('action', 'grupo.action')
+            ->addColumn('action', 'grupo.action')
             ->setRowId('id');
     }
 
@@ -63,13 +63,15 @@ class GrupoDataTable extends DataTable
     {
         return [
            
-            Column::make('id'),
-            Column::make('nome'),
-             // Column::computed('action')
-            //       ->exportable(false)
-            //       ->printable(false)
-            //       ->width(60)
-            //       ->addClass('text-center'),
+            Column::make('id')->title('Id'),
+            Column::make('nome')->title('Nome'),
+            Column::make('descricao')->title('Descrição'),
+             Column::computed('action')
+                ->title('Ações')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
