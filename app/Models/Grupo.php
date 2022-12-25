@@ -11,7 +11,7 @@ class Grupo extends Model
 
     protected $table = 'grupos';
     protected $fillable = [
-        'id', 'nome', 'descricao'
+        'id', 'nome', 'titulo','descricao'
     ];
 
     protected $dates = [

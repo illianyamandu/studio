@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome', 255);
-            $table->string('cpf', 50);
+            $table->string('cpf', 50)->unique();
             $table->integer('status')->default(1);
             $table->string('rg', 50)->nullable();
             $table->string('endereco', 300)->nullable();
-            $table->string('email', 255)->nullable();
+            $table->string('email', 255)->unique()->nullable();
             $table->string('telefone', 50);
             $table->string('instagram', 255)->nullable();
             $table->date('data_nascimento');
