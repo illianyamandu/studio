@@ -132,6 +132,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('grupousuario.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-user-lock"></i>
+                                <p>
+                                    Grupos de usuário
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

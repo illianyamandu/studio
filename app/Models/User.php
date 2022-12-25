@@ -44,4 +44,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function grupo(){
+        return $this->belongsToMany(Grupo::class);
+    }
 }

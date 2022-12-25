@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Grupo\GrupoController;
+use App\Http\Controllers\Usuario\UsuarioGrupoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,11 @@ Route::group(['prefix' => '/'], function () {
         Route::delete('/{grupo_id}', [GrupoController::class, 'delete'])->name('grupo.delete');
     });
 
+    Route::group(['prefix' => 'grupousuario'], function () {
+        Route::get('/', [UsuarioGrupoController::class, 'index'])->name('grupousuario.index');
+        Route::post('/', [UsuarioGrupoController::class, 'store'])->name('grupousuario.create');
+        Route::put('/{grupo_id}', [UsuarioGrupoController::class, 'update'])->name('grupousuario.update');
+        Route::delete('/{grupo_id}', [UsuarioGrupoController::class, 'delete'])->name('grupousuario.delete');
+    });
+    
 });
