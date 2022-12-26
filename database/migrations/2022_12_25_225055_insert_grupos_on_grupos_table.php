@@ -28,7 +28,7 @@ return new class extends Migration
             [
                 'nome' => 'administrador',
                 'titulo' => 'ADMINISTRADOR',
-                'descricao' => 'AAdministrador do stúdio'
+                'descricao' => 'Administrador do stúdio'
             ],
         ];
 

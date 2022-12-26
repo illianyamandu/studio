@@ -24,13 +24,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" enctype="multipart/form-data" method="post" class="form">
+                <form action="{{route('grupo.create')}}" enctype="multipart/form-data" method="post" class="form">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="text-semibold">Nome</label>
                                 <input type="text" class="form-control" name="nome" required>
+                            </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="text-semibold">Título</label>
+                                <input type="text" class="form-control" name="titulo" required>
                             </div>                        
                         </div>
                         <div class="row">
@@ -49,4 +55,11 @@
         </div>
     </div>
     {!! $dataTable->scripts() !!}
+
+    <script>
+        var response = JSON.parse(response)
+        if(!response.error){
+            console.log('chegou');
+        }
+    </script>
 @endsection

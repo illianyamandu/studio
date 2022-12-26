@@ -64,9 +64,9 @@ class GrupoDataTable extends DataTable
         return [
            
             Column::make('id')->title('Id'),
-            Column::make('nome')->title('Nome'),
-            Column::make('descricao')->title('Descrição'),
-             Column::computed('action')
+            Column::make('nome')->title('Nome')->orderable(false),
+            Column::make('descricao')->title('Descrição')->orderable(false),
+            Column::computed('action')
                 ->title('Ações')
                 ->exportable(false)
                 ->printable(false)
