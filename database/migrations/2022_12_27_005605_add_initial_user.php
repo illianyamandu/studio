@@ -15,11 +15,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('grupo_user', function (Blueprint $table) {
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Grupo::class);
-            $table->timestamps();
-        });
+        $user = User::create([
+            'nome' => 'Administrador',
+            'cpf' => '00000000000',
+            'rg' => '0000000',
+            'endereco' => 'X',
+            'telefone' => '00000000000',
+            'data_nascimento' => '2000-01-01'
+        ]);
+
+        $grupo = Grupo::query()->where('nome', '=', 'administrador')->first();
+
+        $user->grupo()->sync([$grupo->id]);
     }
 
     /**
@@ -29,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupo_user');
+        //
     }
 };
