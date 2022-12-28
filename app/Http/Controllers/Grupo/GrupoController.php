@@ -34,7 +34,7 @@ class GrupoController extends Controller
             ],
         );
         if ($validator->fails()) {
-            FormReturn::ReturnError($validator->errors);
+            return FormReturn::ReturnError($validator->errors());
         }
         DB::beginTransaction();
         $data = [
@@ -46,7 +46,8 @@ class GrupoController extends Controller
         Grupo::create($data);
         DB::commit();
 
-        return redirect()->route('grupo.index');
+        return FormReturn::ReturnSuccess('Grupo cadatrado com sucesso!!');
+        // return redirect()->route('grupo.index');
     }
 
     public function update(Request $request, $id){
