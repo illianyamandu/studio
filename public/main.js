@@ -13,11 +13,19 @@ $(function(){
                 $(document).find('span.error-text').text('');
             },
             success:function(data){
+                $(".modal").modal('hide');
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                });
                 $(".form-ajax-master")[0].reset();
-                $(".modal").modal('toggle');
                 $(".table-datatable").DataTable().ajax.reload();
-                toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.');
-                console.log('oi');
             },
             error:function(data){
                 let response = data.responseJSON;

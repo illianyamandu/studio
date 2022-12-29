@@ -15,22 +15,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!--Alerts-->
+    <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    
+    <link rel="stylesheet" href="dist/css/style.css">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="{{asset('main.js')}}"></script>
 
-    <!--Alerts-->
-    <script src="{{asset('plugins/toastr/toastr.min.css')}}"></script>
 
-
-
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     
 </head>
 
@@ -62,8 +65,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                    <i class="fas fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -72,8 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4 main-menu">
-            <!-- Brand Logo -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 main-menu">           <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">

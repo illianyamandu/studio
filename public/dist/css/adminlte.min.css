@@ -14190,7 +14190,6 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 .nav-sidebar .nav-link p {
   display: inline;
   margin: 0;
-  white-space: normal
 }
 
 .sidebar-is-opening .sidebar .nav-sidebar .nav-link p {
@@ -15672,8 +15671,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   }
 
   .sidebar-mini.sidebar-collapse .sidebar .nav-sidebar .nav-link p {
-    width: 0;
-    white-space: nowrap
+    width: 100%;
   }
 
   .sidebar-mini.sidebar-collapse .brand-text,

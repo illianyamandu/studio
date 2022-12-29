@@ -8,9 +8,6 @@
 @endsection
 
 @section('content')
-<button type="button" class="btn btn-success swalDefaultSuccess">
-Launch Success Toast
-</button>
     <div class="row">
         <div class="form-group col-md-12">
             {!! $dataTable->table(['class' => 'table table-condensed table-striped table-datatable']) !!}
@@ -61,20 +58,4 @@ Launch Success Toast
     </div>
     {!! $dataTable->scripts() !!}
 
-    <script>
-  $(function() {
-    var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-    $('.swalDefaultSuccess').click(function() {
-      Toast.fire({
-        icon: 'success',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    });
-    </script>
 @endsection

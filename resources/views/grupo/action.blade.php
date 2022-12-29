@@ -4,8 +4,8 @@
     display: flex;
   }
 
-  .actions a{
-    margin-right: 3px;
+  .actions {
+    gap: 3px;
   }
 </style>
 
