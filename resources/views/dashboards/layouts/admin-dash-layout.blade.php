@@ -21,9 +21,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="{{asset('main.js')}}"></script>
-    <script src="plugins/toastr/toastr.min.js"></script>
 
-    <script src="../../../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!--Alerts-->
+    <script src="{{asset('plugins/toastr/toastr.min.css')}}"></script>
 
 
 
@@ -212,8 +212,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
     <!-- Alerts -->
-    <!-- <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="../../plugins/toastr/toastr.min.js"></script> -->
+    <script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script> 
 
     <!-- Datatables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
