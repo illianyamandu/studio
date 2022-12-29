@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{asset('main.js')}}"></script>
     <script src="plugins/toastr/toastr.min.js"></script>
 
+    <script src="../../../../plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -207,6 +211,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
+    <!-- Alerts -->
+    <!-- <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="../../plugins/toastr/toastr.min.js"></script> -->
 
     <!-- Datatables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
