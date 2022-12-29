@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="{{asset('main.js')}}"></script>
+    <script src="plugins/toastr/toastr.min.js"></script>
 
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">

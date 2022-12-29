@@ -10,13 +10,14 @@ $(function(){
             dataType:'json',
             contentType:false,
             beforeSend:function(){
-                $(document).find('span-error-text').text('');
+                $(document).find('span.error-text').text('');
             },
             success:function(data){
                 $(".form-ajax-master")[0].reset();
-                alert(data.message);
-                window.location.reload();
-
+                $(".modal").modal('toggle');
+                $(".table-datatable").DataTable().ajax.reload();
+                toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.');
+                console.log('oi');
             },
             error:function(data){
                 let response = data.responseJSON;
