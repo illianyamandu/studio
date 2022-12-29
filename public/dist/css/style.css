@@ -4,3 +4,17 @@ table.dataTable {
 .main-sidebar{
     background-color: #121212 !important;
 }
+
+.content-wrapper{
+    background-color: #e6e6e6;
+}
+
+.main-header{
+    background-color: white !important;
+}
+
+.div-datatable{
+    background-color: white;
+    padding: 2%;
+    border-radius: 20px;
+}

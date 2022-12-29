@@ -9,7 +9,7 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="row div-datatable">
         <div class="form-group col-md-12">
             {!! $dataTable->table(['class' => 'table table-condensed table-striped']) !!}
         </div>

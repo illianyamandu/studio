@@ -1,5 +1,6 @@
 $(function(){
     $(".form-ajax-master").on('submit', function(e){
+        
         e.preventDefault();
 
         $.ajax({
@@ -14,16 +15,7 @@ $(function(){
             },
             success:function(data){
                 $(".modal").modal('hide');
-                var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                });
+                toastr.success(data.message)
                 $(".form-ajax-master")[0].reset();
                 $(".table-datatable").DataTable().ajax.reload();
             },
@@ -31,6 +23,7 @@ $(function(){
                 let response = data.responseJSON;
                 $.each(response.error, function(prefix, val){
                     $('span.'+prefix+'_error').text(val[0]);
+                    toastr.error(val[0]);
                 });
             }
         });
