@@ -30,7 +30,7 @@ class UsuarioGrupoController extends Controller
                 ],
             );
             if ($validator->fails()) {
-                FormReturn::ReturnError($validator->errors);
+                return FormReturn::ReturnError($validator->errors());
             }
             DB::beginTransaction();
             $grupo = Grupo::findOrFail($request->grupo);
@@ -39,9 +39,11 @@ class UsuarioGrupoController extends Controller
             
             DB::commit();
     
-            return redirect()->route('grupousuario.index');
+            return FormReturn::ReturnSuccess('Grupo vinculado com sucesso!');
         }catch(Exception $e){
-            return redirect()->route('grupousuario.index');
+            DB::rollBack();
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
     }
 

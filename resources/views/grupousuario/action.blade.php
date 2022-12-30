@@ -12,13 +12,6 @@
 <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$user->id}}" type="button" title="Grupo">
     <i class="fa fa-layer-group"></i>
 </a>
-{{-- <form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form">
-  @csrf
-  @method('DELETE')
-  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir">
-      <i class="fa fa-trash"></i>
-  </button>
-</form> --}}
 </div>
 
 <div class="modal fade" id="{{'modal-'.$user->id}}">
@@ -30,7 +23,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('grupousuario.create')}}" enctype="multipart/form-data" method="post" class="form">
+                <form action="{{route('grupousuario.create')}}" enctype="multipart/form-data" method="post" class="form" id="form-ajax-edit">
                     @csrf
                     @method('POST')
                     <div class="modal-body">
@@ -55,3 +48,37 @@
             </div>
         </div>
     </div>
+
+
+<script>
+    $(function(){
+    $("#form-ajax-edit").on('submit', function(e){
+    
+        e.preventDefault();
+        $.ajax({
+            url:$(this).attr('action'),
+            method:$(this).attr('method'),
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+                $(document).find('span.error-text').text('');
+            },
+            success:function(data){
+                $(".modal").modal('hide');
+                toastr.success(data.message)
+                $(".form-ajax-master")[0].reset();
+                $(".table-datatable").DataTable().ajax.reload();
+            },
+            error:function(data){
+                let response = data.responseJSON;
+                $.each(response.error, function(prefix, val){
+                    $('span.'+prefix+'_error').text(val[0]);
+                    toastr.error(val[0]);
+                });
+            }
+        });
+    });
+});
+</script>

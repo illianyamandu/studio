@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Utils\FormReturn;
 use Illuminate\Support\Facades\DB;
-use App\Models\Cliente;
 use App\DataTables\ClienteDataTable;
 use App\Models\User;
 use Carbon\Carbon;
@@ -61,7 +60,6 @@ class ClienteController extends Controller
             User::create($data);
             DB::commit();
     
-            // return redirect()->route('cliente.index');
             return FormReturn::ReturnSuccess('Cliente cadastrado com sucesso!', 200);
         }catch(Exception $e){
             DB::rollBack();
