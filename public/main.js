@@ -1,8 +1,7 @@
 $(function(){
     $(".form-ajax-master").on('submit', function(e){
-        
+        console.log('oi');
         e.preventDefault();
-
         $.ajax({
             url:$(this).attr('action'),
             method:$(this).attr('method'),

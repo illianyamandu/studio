@@ -11,7 +11,7 @@
 
     <div class="row div-datatable">
         <div class="form-group col-md-12">
-            {!! $dataTable->table(['class' => 'table table-condensed table-striped']) !!}
+            {!! $dataTable->table(['class' => 'table table-condensed table-striped table-datatable']) !!}
         </div>
     </div>
 
@@ -25,7 +25,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('cliente.create') }}" enctype="multipart/form-data" method="post" class="form">
+                <form action="{{ route('cliente.create') }}" class="form form-ajax-master" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="row">

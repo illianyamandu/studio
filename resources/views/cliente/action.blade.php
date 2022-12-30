@@ -12,10 +12,10 @@
 <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
     <i class="fa fa-pen"></i>
 </a>
-<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form">
+<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form form-ajax-master" id="form-delete">
   @csrf
   @method('DELETE')
-  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir">
+  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="delete">
       <i class="fa fa-trash"></i>
   </button>
 </form>
@@ -30,7 +30,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form">
+                <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="form-ajax-edit">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
@@ -90,3 +90,92 @@
             </div>
         </div>
     </div>
+
+
+<script>
+    $(document).on('click', '#delete', function(e){
+        e.preventDefault();
+        
+        Swal.fire({
+            title: 'Deseja excluir o registro?',
+            text: "O registro será permanentemente removido!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Sim, desejo excluir!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#form-delete").submit();
+            }
+        })
+    });
+
+</script>
+    
+<script>
+    $(function(){
+    $("#form-ajax-edit").on('submit', function(e){
+    
+        e.preventDefault();
+        $.ajax({
+            url:$(this).attr('action'),
+            method:$(this).attr('method'),
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+                $(document).find('span.error-text').text('');
+            },
+            success:function(data){
+                $(".modal").modal('hide');
+                toastr.success(data.message)
+                $(".form-ajax-master")[0].reset();
+                $(".table-datatable").DataTable().ajax.reload();
+            },
+            error:function(data){
+                let response = data.responseJSON;
+                $.each(response.error, function(prefix, val){
+                    $('span.'+prefix+'_error').text(val[0]);
+                    toastr.error(val[0]);
+                });
+            }
+        });
+    });
+});
+</script>
+
+<script>
+    $(function(){
+    $("#form-delete").on('submit', function(e){
+    
+        e.preventDefault();
+        $.ajax({
+            url:$(this).attr('action'),
+            method:$(this).attr('method'),
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+                $(document).find('span.error-text').text('');
+            },
+            success:function(data){
+                $(".modal").modal('hide');
+                toastr.success(data.message)
+                $(".form-ajax-master")[0].reset();
+                $(".table-datatable").DataTable().ajax.reload();
+            },
+            error:function(data){
+                let response = data.responseJSON;
+                $.each(response.error, function(prefix, val){
+                    $('span.'+prefix+'_error').text(val[0]);
+                    toastr.error(val[0]);
+                });
+            }
+        });
+    });
+});
+</script>

@@ -40,9 +40,11 @@ class ClienteController extends Controller
                     'telefone.required' => 'Digite o telefone do cliente',
                 ],
             );
-            if ($validator->fails()) {
-                FormReturn::ReturnError($validator->errors);
+
+            if ($validator->fails()){
+                return FormReturn::ReturnError($validator->errors());
             }
+
             DB::beginTransaction();
             $data = [
                 'nome' => $request->nome,
@@ -59,17 +61,18 @@ class ClienteController extends Controller
             User::create($data);
             DB::commit();
     
-            return redirect()->route('cliente.index');
-            // FormReturn::ReturnSuccess('Cliente cadastrado com sucesso!', 200);
+            // return redirect()->route('cliente.index');
+            return FormReturn::ReturnSuccess('Cliente cadastrado com sucesso!', 200);
         }catch(Exception $e){
             DB::rollBack();
-            return redirect()->route('cliente.index');
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
     }
 
 
     public function update(Request $request, $id){
-        try{
+        try{            
             $validator = Validator::make(
                 $request->all(),
                 [
@@ -88,7 +91,7 @@ class ClienteController extends Controller
                 ],
             );
             if ($validator->fails()) {
-                FormReturn::ReturnError($validator->errors);
+                return FormReturn::ReturnError($validator->errors());
             }
     
             DB::beginTransaction();
@@ -105,10 +108,11 @@ class ClienteController extends Controller
             ];
             User::findOrFail($id)->update($data);
             DB::commit();
-            return redirect()->route('cliente.index');
+            return FormReturn::ReturnSuccess('Cliente atualizado com sucesso');
         }catch(Exception $e){
             DB::rollBack();
-            return redirect()->route('cliente.index');
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
     }
 
@@ -117,10 +121,11 @@ class ClienteController extends Controller
             DB::beginTransaction();
             User::findOrFail($id)->delete();
             DB::commit();
-            return redirect()->route('cliente.index');
+            return FormReturn::ReturnSuccess('Registro apagado com sucesso!');
         }catch(Exception $e){
             DB::rollBack();
-            return redirect()->route('cliente.index');
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         $user = User::create([
-            'nome' => 'Administrador',
+            'nome' => 'Márcia',
             'cpf' => '00000000000',
             'rg' => '0000000',
             'endereco' => 'X',

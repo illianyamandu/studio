@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Cliente;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -26,6 +27,9 @@ class ClienteDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'cliente.action')
+            ->editColumn('data_nascimento', function($object){
+                return Carbon::parse($object->data_nascimento)->format('d-m-Y');
+            })
             ->setRowId('id');
     }
 
@@ -66,6 +70,8 @@ class ClienteDataTable extends DataTable
         return [
             Column::make('id')->title('Id'),
             Column::make('nome')->title('Nome'),
+            Column::make('data_nascimento')->title('Data de nascimento'),
+            Column::make('telefone')->title('Telefone'),
             Column::make('email')->title('E-mail'),
             Column::make('action')->title('Ações')->searchable(false)->orderable(false)
         ];
