@@ -117,7 +117,14 @@
 <script>
     $(function(){
     $("#form-ajax-edit").on('submit', function(e){
-    
+        
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
         e.preventDefault();
         $.ajax({
             url:$(this).attr('action'),
@@ -131,7 +138,10 @@
             },
             success:function(data){
                 $(".modal").modal('hide');
-                toastr.success(data.message)
+                Toast.fire({
+                    icon: 'success',
+                    title: data.message
+                })
                 $(".form-ajax-master")[0].reset();
                 $(".table-datatable").DataTable().ajax.reload();
             },
