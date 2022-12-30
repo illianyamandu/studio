@@ -18,69 +18,80 @@ class GrupoController extends Controller
     }
 
     public function store(Request $request){
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'nome' => 'required|max:255',
-                'titulo' => 'required|max:255',
-                'descricao' => 'max:300',                
-            ],
-            [
-                'nome.required' => 'Digite o nome do grupo de acesso',
-                'nome.max' => 'O nome não pode conter mais do que 255 caracteres',
-                'titulo.required' => 'Digite o título do grupo de acesso',
-                'titulo.max' => 'O título não pode conter mais do que 255 caracteres',
-                'descricao.max' => 'A descrição não pode conter mais do que 300 caracteres',
-            ],
-        );
-        if ($validator->fails()) {
-            return FormReturn::ReturnError($validator->errors());
-        }
-        DB::beginTransaction();
-        $data = [
-            'nome' => $request->nome,
-            'titulo' => $request->titulo,
-            'descricao' => $request->descricao
-        ];
-        
-        Grupo::create($data);
-        DB::commit();
+        try{
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'nome' => 'required|max:255',
+                    'titulo' => 'required|max:255',
+                    'descricao' => 'max:300',                
+                ],
+                [
+                    'nome.required' => 'Digite o nome do grupo de acesso',
+                    'nome.max' => 'O nome não pode conter mais do que 255 caracteres',
+                    'titulo.required' => 'Digite o título do grupo de acesso',
+                    'titulo.max' => 'O título não pode conter mais do que 255 caracteres',
+                    'descricao.max' => 'A descrição não pode conter mais do que 300 caracteres',
+                ],
+            );
+            if ($validator->fails()) {
+                return FormReturn::ReturnError($validator->errors());
+            }
+            DB::beginTransaction();
+            $data = [
+                'nome' => $request->nome,
+                'titulo' => $request->titulo,
+                'descricao' => $request->descricao
+            ];
+            
+            Grupo::create($data);
+            DB::commit();
 
-        return FormReturn::ReturnSuccess('Grupo cadatrado com sucesso!!');
-        // return redirect()->route('grupo.index');
+            return FormReturn::ReturnSuccess('Grupo cadatrado com sucesso!!');
+        }catch(Exception $e){
+            DB::rollBack();
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
+        }
+
     }
 
     public function update(Request $request, $id){
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'nome' => 'required|max:255',     
-                'titulo' => 'required|max:255',           
-                'descricao' => 'max:300',                
-            ],
-            [
-                'nome.required' => 'Digite o nome do grupo de acesso',
-                'nome.max' => 'O nome não pode conter mais do que 255 caracteres',
-                'titulo.required' => 'Digite o título do grupo de acesso',
-                'titulo.max' => 'O título não pode conter mais do que 255 caracteres',
-                'descricao.max' => 'A descrição não pode conter mais do que 300 caracteres',
-            ],
-        );
-        if ($validator->fails()) {
-            // dd($validator->errors());
-            FormReturn::ReturnError($validator->errors());
+        try{
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'nome' => 'required|max:255',     
+                    'titulo' => 'required|max:255',           
+                    'descricao' => 'max:300',                
+                ],
+                [
+                    'nome.required' => 'Digite o nome do grupo de acesso',
+                    'nome.max' => 'O nome não pode conter mais do que 255 caracteres',
+                    'titulo.required' => 'Digite o título do grupo de acesso',
+                    'titulo.max' => 'O título não pode conter mais do que 255 caracteres',
+                    'descricao.max' => 'A descrição não pode conter mais do que 300 caracteres',
+                ],
+            );
+            if ($validator->fails()) {
+                return FormReturn::ReturnError($validator->errors());
+            }
+            DB::beginTransaction();
+            $data = [
+                'nome' => $request->nome,
+                'titulo' => $request->titulo,
+                'descricao' => $request->descricao
+            ];
+            
+            Grupo::findOrFail($id)->update($data);
+            DB::commit();
+    
+            return FormReturn::ReturnSuccess('Grupo atualizado com sucesso');
+        }catch(Exception $e){
+            DB::rollBack();
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
-        DB::beginTransaction();
-        $data = [
-            'nome' => $request->nome,
-            'titulo' => $request->titulo,
-            'descricao' => $request->descricao
-        ];
-        
-        Grupo::findOrFail($id)->update($data);
-        DB::commit();
-
-        return redirect()->route('grupo.index');
     }
 
     public function delete($id){
@@ -88,10 +99,11 @@ class GrupoController extends Controller
             DB::beginTransaction();
             Grupo::findOrFail($id)->delete();
             DB::commit();
-            return redirect()->route('grupo.index');
+            return FormReturn::ReturnSuccess('Registro removido com sucesso!');
         }catch(Exception $e){
             DB::rollBack();
-            return redirect()->route('grupo.index');
+            $msg = $e->getMessage() != "" ? $e->getMessage() : 'Ocorreu um erro, informe ao administrador';
+            return FormReturn::ReturnError(['error' => [$msg]]);
         }
     }
 }

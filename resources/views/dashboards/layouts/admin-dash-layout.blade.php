@@ -57,6 +57,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             display: flex;
             flex-direction: column;
         }
+        .section-action a:hover {
+            color: blue;
+            transition: 300ms;
+        }
     </style>
     <div class="wrapper">
 
