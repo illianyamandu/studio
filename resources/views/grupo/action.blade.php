@@ -31,7 +31,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('grupo.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="form-ajax-edit">
+                <form action="{{ route('grupo.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="{{'form-'.$id.'-edit'}}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
@@ -88,8 +88,7 @@
     
 <script>
     $(function(){
-    $("#form-ajax-edit").on('submit', function(e){
-    
+    $("#form-"+{{$id}}+"-edit").on('submit', function(e){
         e.preventDefault();
         $.ajax({
             url:$(this).attr('action'),
