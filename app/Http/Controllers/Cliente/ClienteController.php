@@ -25,24 +25,41 @@ class ClienteController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'nome' => 'required',
-                    'data_nascimento' => 'required',
-                    'status' => 'required',
-                    'cpf' => 'required',
-                    'telefone' => 'required',
+                    'nome' => 'required|max:255',
+                    'data_nascimento' => 'required|date',
+                    'status' => 'required|min:0|max:1',
+                    'cpf' => 'required|unique:users,cpf',
+                    'telefone' => 'required|max:50',
+                    'email' => 'unique:users,email|max:255',
+                    'instagram' => 'max:255',
+                    'endereco' => 'max:300',
+                    'rg' => 'max:50,'
                 ],
                 [
                     'nome.required' => 'Digite o nome do cliente',
+                    'nome.max' => 'O nome deve conter, no máximo, 255 caracteres',
                     'data_nascimento.required' => 'Forneça a data de nascimento',
+                    'data_nascimento.date' => 'Formato de data inválido',
                     'status.required' => 'Defina o status do cliente',
+                    'status.min' => 'Status inválido',
+                    'status.max' => 'Status inválido',
                     'cpf.required' => 'Digite o CPF do cliente',
+                    'cpf.unique' => 'Já existe um registro com esse CPF',
+                    'email.unique' => 'Já existe um registro com esse e-mail',
                     'telefone.required' => 'Digite o telefone do cliente',
+                    'telefone.max' => 'O telefone deve conter, no máximo, 50 caracteres',
+                    'email.max' => 'O e-mail deve conter, no máximo, 255 caracteres',
+                    'instagram.max' => 'O Instagram deve conter, no máximo, 255 caracteres',
+                    'endereco.max' => 'O endereço deve conter, no máximo, 300 caracteres',
+                    'rg.max' => 'O RG deve conter, no máximo, 50 caracteres',
                 ],
             );
 
             if ($validator->fails()){
                 return FormReturn::ReturnError($validator->errors());
             }
+
+            
 
             DB::beginTransaction();
             $data = [
@@ -74,20 +91,36 @@ class ClienteController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'nome' => 'required',
-                    'data_nascimento' => 'required',
-                    'status' => 'required',
-                    'cpf' => 'required',
-                    'telefone' => 'required',
+                    'nome' => 'required|max:255',
+                    'data_nascimento' => 'required|date',
+                    'status' => 'required|min:0|max:1',
+                    'cpf' => 'required|unique:users,cpf',
+                    'telefone' => 'required|max:50',
+                    'email' => 'unique:users,email|max:255',
+                    'instagram' => 'max:255',
+                    'endereco' => 'max:300',
+                    'rg' => 'max:50,'
                 ],
                 [
                     'nome.required' => 'Digite o nome do cliente',
+                    'nome.max' => 'O nome deve conter, no máximo, 255 caracteres',
                     'data_nascimento.required' => 'Forneça a data de nascimento',
+                    'data_nascimento.date' => 'Formato de data inválido',
                     'status.required' => 'Defina o status do cliente',
+                    'status.min' => 'Status inválido',
+                    'status.max' => 'Status inválido',
                     'cpf.required' => 'Digite o CPF do cliente',
+                    'cpf.unique' => 'Já existe um registro com esse CPF',
+                    'email.unique' => 'Já existe um registro com esse e-mail',
                     'telefone.required' => 'Digite o telefone do cliente',
+                    'telefone.max' => 'O telefone deve conter, no máximo, 50 caracteres',
+                    'email.max' => 'O e-mail deve conter, no máximo, 255 caracteres',
+                    'instagram.max' => 'O Instagram deve conter, no máximo, 255 caracteres',
+                    'endereco.max' => 'O endereço deve conter, no máximo, 300 caracteres',
+                    'rg.max' => 'O RG deve conter, no máximo, 50 caracteres',
                 ],
             );
+            
             if ($validator->fails()) {
                 return FormReturn::ReturnError($validator->errors());
             }

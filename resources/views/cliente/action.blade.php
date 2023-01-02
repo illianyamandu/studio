@@ -160,7 +160,7 @@
 <script>
     $(function(){
     $("#form-delete").on('submit', function(e){
-    
+        console.log('oi');
         e.preventDefault();
         $.ajax({
             url:$(this).attr('action'),
