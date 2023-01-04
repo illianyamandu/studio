@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Cliente\ClienteController;
+use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\Grupo\GrupoController;
 use App\Http\Controllers\Usuario\UsuarioGrupoController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,11 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/', [UsuarioGrupoController::class, 'store'])->name('grupousuario.create');
         Route::put('/{grupo_id}', [UsuarioGrupoController::class, 'update'])->name('grupousuario.update');
         Route::delete('/{grupo_id}', [UsuarioGrupoController::class, 'delete'])->name('grupousuario.delete');
+    });
+
+    Route::group(['prefix' => 'colaborador'], function (){
+        Route::get('/', [ColaboradorController::class, 'index'])->name('colaborador.index');
+        Route::post('/', [ColaboradorController::class, 'store'])->name('colaborador.create');
     });
     
 });
