@@ -13,10 +13,10 @@
     <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
         <i class="fa fa-pen"></i>
     </a>
-    <form action="{{ route('grupo.delete', $id) }}" enctype="multipart/form-data" method="post" class="form" id="form-delete">
+    <form action="{{ route('grupo.delete', $id) }}" enctype="multipart/form-data" method="post" class="form" id="{{'form-delete-'.$id}}">
     @csrf
     @method('DELETE')
-        <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="delete">
+        <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="{{'delete-'.$id}}">
             <i class="fa fa-trash"></i>
         </button>
     </form>
@@ -65,7 +65,7 @@
 
 
     <script>
-    $(document).on('click', '#delete', function(e){
+    $(document).on('click', '#delete-'+{{$id}}, function(e){
         e.preventDefault();
         
         Swal.fire({
@@ -79,7 +79,7 @@
             confirmButtonText: 'Sim, desejo excluir!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#form-delete").submit();
+                $("#form-delete-"+{{$id}}).submit();
             }
         })
     });
@@ -120,7 +120,7 @@
 
 <script>
     $(function(){
-    $("#form-delete").on('submit', function(e){
+    $("#form-delete-"+{{$id}}).on('submit', function(e){
     
         e.preventDefault();
         $.ajax({

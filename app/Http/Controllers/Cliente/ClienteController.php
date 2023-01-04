@@ -94,9 +94,9 @@ class ClienteController extends Controller
                     'nome' => 'required|max:255',
                     'data_nascimento' => 'required|date',
                     'status' => 'required|min:0|max:1',
-                    'cpf' => 'required|unique:users,cpf',
+                    'cpf' => 'required',
                     'telefone' => 'required|max:50',
-                    'email' => 'unique:users,email|max:255',
+                    'email' => 'max:255',
                     'instagram' => 'max:255',
                     'endereco' => 'max:300',
                     'rg' => 'max:50,'
@@ -110,8 +110,6 @@ class ClienteController extends Controller
                     'status.min' => 'Status inválido',
                     'status.max' => 'Status inválido',
                     'cpf.required' => 'Digite o CPF do cliente',
-                    'cpf.unique' => 'Já existe um registro com esse CPF',
-                    'email.unique' => 'Já existe um registro com esse e-mail',
                     'telefone.required' => 'Digite o telefone do cliente',
                     'telefone.max' => 'O telefone deve conter, no máximo, 50 caracteres',
                     'email.max' => 'O e-mail deve conter, no máximo, 255 caracteres',
@@ -120,6 +118,8 @@ class ClienteController extends Controller
                     'rg.max' => 'O RG deve conter, no máximo, 50 caracteres',
                 ],
             );
+
+
             
             if ($validator->fails()) {
                 return FormReturn::ReturnError($validator->errors());
@@ -137,7 +137,28 @@ class ClienteController extends Controller
                 'rg' => $request->rg,
                 'endereco' => $request->endereco,
             ];
-            User::findOrFail($id)->update($data);
+            $user = User::findOrFail($id);
+
+            if(strcmp($user->email, $request->email) === 0){
+                unset($data['email']);
+            }else{
+                $duplicado = User::query()->where('email', '=', $request->email)->first();
+                if(isset($duplicado)){
+                    return FormReturn::ReturnError(['error' => ['Já existe um registro com esse e-mail']]);
+                }
+            }
+
+            if(strcmp($user->cpf, $request->cpf) === 0){
+                unset($data['cpf']);
+            }else{
+                $duplicado = User::query()->where('cpf', '=', $request->cpf)->first();
+                if(isset($duplicado)){
+                    return FormReturn::ReturnError(['error' => ['Já existe um registro com esse CPF']]);
+                }
+            }
+
+            $user->update($data);
+
             DB::commit();
             return FormReturn::ReturnSuccess('Cliente atualizado com sucesso');
         }catch(Exception $e){

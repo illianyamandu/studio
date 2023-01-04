@@ -38,7 +38,6 @@
                             <div class="form-group col-md-12">
                                 <label class="text-semibold">Título</label>
                                 <input type="text" class="form-control" name="titulo" >
-                                <span class="text-danger error-text titulo_error"></span>
                             </div>                        
                         </div>
                         <div class="row">

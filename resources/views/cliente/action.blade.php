@@ -12,10 +12,10 @@
 <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
     <i class="fa fa-pen"></i>
 </a>
-<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form form-ajax-master" id="form-delete">
+<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form form-ajax-master" id="{{'form-delete-'.$id}}">
   @csrf
   @method('DELETE')
-  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="delete">
+  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="{{'delete-'.$id}}">
       <i class="fa fa-trash"></i>
   </button>
 </form>
@@ -30,7 +30,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="form-ajax-edit">
+                <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="{{'form-ajax-edit-'.$id}}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
@@ -93,7 +93,7 @@
 
 
 <script>
-    $(document).on('click', '#delete', function(e){
+    $(document).on('click', '#delete-'+{{$id}}, function(e){
         e.preventDefault();
         
         Swal.fire({
@@ -107,7 +107,7 @@
             confirmButtonText: 'Sim, desejo excluir!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#form-delete").submit();
+                $("#form-delete-"+{{$id}}).submit();
             }
         })
     });
@@ -116,7 +116,7 @@
     
 <script>
     $(function(){
-    $("#form-ajax-edit").on('submit', function(e){
+    $("#form-ajax-edit-"+{{$id}}).on('submit', function(e){
         
         var Toast = Swal.mixin({
             toast: true,
@@ -159,7 +159,7 @@
 
 <script>
     $(function(){
-    $("#form-delete").on('submit', function(e){
+    $("#form-delete-"+{{$id}}).on('submit', function(e){
         console.log('oi');
         e.preventDefault();
         $.ajax({

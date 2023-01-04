@@ -22,12 +22,13 @@ class GrupoController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'nome' => 'required|max:255',
+                    'nome' => 'required|max:255|unique:grupos,nome',
                     'titulo' => 'required|max:255',
                     'descricao' => 'max:300',                
                 ],
                 [
                     'nome.required' => 'Digite o nome do grupo de acesso',
+                    'nome.unique' => 'Já existe um registro com esse nome',
                     'nome.max' => 'O nome não pode conter mais do que 255 caracteres',
                     'titulo.required' => 'Digite o título do grupo de acesso',
                     'titulo.max' => 'O título não pode conter mais do que 255 caracteres',
@@ -83,7 +84,19 @@ class GrupoController extends Controller
                 'descricao' => $request->descricao
             ];
             
-            Grupo::findOrFail($id)->update($data);
+            $grupo = Grupo::findOrFail($id);
+
+            if(strcmp($grupo->nome, $request->nome) === 0){
+                unset($data['nome']);
+            }else{
+                $duplicado = Grupo::query()->where('nome', '=', $request->nome)->first();
+                if(isset($duplicado)){
+                    return FormReturn::ReturnError(['error' => ['Já existe um registro com esse nome']]);
+                }
+            }
+
+            $grupo->update($data);
+
             DB::commit();
     
             return FormReturn::ReturnSuccess('Grupo atualizado com sucesso');

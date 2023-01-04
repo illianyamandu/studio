@@ -23,7 +23,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('grupousuario.create')}}" enctype="multipart/form-data" method="post" class="form" id="form-ajax-edit">
+                <form action="{{route('grupousuario.create')}}" enctype="multipart/form-data" method="post" class="form" id="{{'form-ajax-edit-'.$user->id}}">
                     @csrf
                     @method('POST')
                     <div class="modal-body">
@@ -52,8 +52,15 @@
 
 <script>
     $(function(){
-    $("#form-ajax-edit").on('submit', function(e){
-    
+    $("#form-ajax-edit-"+{{$user->id}}).on('submit', function(e){
+        
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
         e.preventDefault();
         $.ajax({
             url:$(this).attr('action'),
@@ -67,9 +74,12 @@
             },
             success:function(data){
                 $(".modal").modal('hide');
-                toastr.success(data.message)
-                $(".form-ajax-master")[0].reset();
+                Toast.fire({
+                    icon: 'success',
+                    title: data.message
+                })
                 $(".table-datatable").DataTable().ajax.reload();
+                $(".form-ajax-master")[0].reset();
             },
             error:function(data){
                 let response = data.responseJSON;
