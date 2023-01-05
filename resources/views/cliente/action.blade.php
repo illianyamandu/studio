@@ -9,35 +9,35 @@
 </style>
 
 <div class="actions">
-<a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$user_id}}" type="button" title="Editar">
+<a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
     <i class="fa fa-pen"></i>
 </a>
-<form action="{{ route('cliente.delete', $user_id) }}" enctype="multipart/form-data" method="post" class="form form-ajax-master" id="{{'form-delete-'.$user_id}}">
+<form action="{{ route('cliente.delete', $id) }}" enctype="multipart/form-data" method="post" class="form form-ajax-master" id="{{'form-delete-'.$id}}">
   @csrf
   @method('DELETE')
-  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="{{'delete-'.$user_id}}">
+  <button class="btn btn-danger btn-sm rounded-0" type="submit" title="Excluir" id="{{'delete-'.$id}}">
       <i class="fa fa-trash"></i>
   </button>
 </form>
 </div>
 
-<div class="modal fade" id="{{'modal-'.$user_id}}">
+<div class="modal fade" id="{{'modal-'.$id}}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar Cliente {{$user_id}}</h4>
+                    <h4 class="modal-title">Editar Cliente {{$id}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('cliente.update', $user_id) }}" enctype="multipart/form-data" method="post" class="form" id="{{'form-ajax-edit-'.$user_id}}">
+                <form action="{{ route('cliente.update', $id) }}" enctype="multipart/form-data" method="post" class="form" id="{{'form-ajax-edit-'.$id}}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="text-semibold">Nome</label>
-                                <input type="text" class="form-control" name="nome" required value="{{$name}}">
+                                <input type="text" class="form-control" name="nome" required value="{{$nome}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-semibold">E-mail</label>
@@ -93,7 +93,7 @@
 
 
 <script>
-    $(document).on('click', '#delete-'+{{$user_id}}, function(e){
+    $(document).on('click', '#delete-'+{{$id}}, function(e){
         e.preventDefault();
         
         Swal.fire({
@@ -107,7 +107,7 @@
             confirmButtonText: 'Sim, desejo excluir!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $("#form-delete-"+{{$user_id}}).submit();
+                $("#form-delete-"+{{$id}}).submit();
             }
         })
     });
@@ -116,7 +116,7 @@
     
 <script>
     $(function(){
-    $("#form-ajax-edit-"+{{$user_id}}).on('submit', function(e){
+    $("#form-ajax-edit-"+{{$id}}).on('submit', function(e){
         
         var Toast = Swal.mixin({
             toast: true,
@@ -159,7 +159,7 @@
 
 <script>
     $(function(){
-    $("#form-delete-"+{{$user_id}}).on('submit', function(e){
+    $("#form-delete-"+{{$id}}).on('submit', function(e){
         console.log('oi');
         e.preventDefault();
         $.ajax({

@@ -1,3 +1,5 @@
+
+
 $(function(){
     $(".form-ajax-master").on('submit', function(e){
         console.log('oi');

@@ -26,11 +26,11 @@ class ClienteDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-           //->addColumn('action', 'cliente.action')
+           ->addColumn('action', 'cliente.action')
             ->editColumn('data_nascimento', function($object){
                 return Carbon::parse($object->data_nascimento)->format('d-m-Y');
             })
-            ->setRowId('cpf');
+            ->setRowId('id');
     }
 
     /**
@@ -46,10 +46,12 @@ class ClienteDataTable extends DataTable
         ->join('grupos', 'grupo_user.grupo_id', 'grupos.id')
         ->where('grupos.nome', '=', 'cliente')
         ->select([
-            'grupos.*',
+            'users.*',
             'grupos.nome as nome_grupo',
-            'users.id as user_id',
-            'users.name as nome_usuario'
+            'users.nome as nome',
+            'users.data_nascimento as data_nascimento',
+            'users.telefone as telefone',
+            'users.email as email',
         ]);
     }
 
@@ -75,13 +77,13 @@ class ClienteDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('nome_grupo')->title('Nome grupo'),
-            Column::make('nome_usuario')->title('Nome usuario'),
-            // Column::make('cpf')->title('CPF'),
-            // Column::make('data_nascimento')->title('Data de nascimento'),
-            // Column::make('telefone')->title('Telefone'),
-            // Column::make('email')->title('E-mail'),
-            // Column::make('action')->title('Ações')->searchable(false)->orderable(false)
+            Column::make('id')->title('Id'),
+            Column::make('nome')->title('Nome usuario')->orderable(false),
+            Column::make('cpf')->title('CPF')->orderable(false),
+            Column::make('data_nascimento')->title('Data de nascimento')->orderable(false),
+            Column::make('telefone')->title('Telefone')->orderable(false),
+            Column::make('email')->title('E-mail')->orderable(false),
+            Column::make('action')->title('Ações')->searchable(false)->orderable(false)
         ];
     }
 

@@ -67,7 +67,7 @@ class ClienteController extends Controller
 
             DB::beginTransaction();
             $data = [
-                'name' => $request->nome,
+                'nome' => $request->nome,
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'telefone' => $request->telefone,
@@ -134,7 +134,7 @@ class ClienteController extends Controller
             
             DB::beginTransaction();
             $data = [
-                'name' => $request->nome,
+                'nome' => $request->nome,
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'telefone' => $request->telefone,

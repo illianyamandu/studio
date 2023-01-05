@@ -79,7 +79,7 @@ class ColaboradorDataTable extends DataTable
     {
         return [
             Column::make('id')->title('Id'),
-            Column::make('name')->title('Nome'),
+            Column::make('nome')->title('Nome'),
             Column::make('data_nascimento')->title('Data de nascimento'),
             Column::make('telefone')->title('Telefone'),
             Column::make('email')->title('E-mail'),

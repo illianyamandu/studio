@@ -76,7 +76,7 @@ class GrupoUsuarioDataTable extends DataTable
     {
         return [
             Column::make('id')->title('Id'),
-            Column::make('name')->title('Nome'),
+            Column::make('nome')->title('Nome'),
             Column::computed('grupo')
                 ->title('Grupo'),
             Column::computed('action')

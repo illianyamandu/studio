@@ -17,10 +17,10 @@ return new class extends Migration
     {
         $user = User::create([
             'nome' => 'Márcia Gomes Rodrigues',
-            'cpf' => '641.905.791-49',
+            'cpf' => '00000000000',
             'rg' => '0000000',
             'endereco' => 'X',
-            'telefone' => '62999292337',
+            'telefone' => '00000000000',
             'data_nascimento' => '1974-10-11'
         ]);
 
