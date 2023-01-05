@@ -49,12 +49,9 @@ class ColaboradorDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         return $model->query()
-        ->join('grupo_user', 'users.id', 'grupo_user.user_id');
-        // ->join('grupos', 'grupos.id', 'grupo_user.grupo_id');
-        // return $model->where('nome', 'like', '%Json%');
-        // ->join('grupo_user', 'users.id', 'grupo_user.user_id')
-        // ->join('grupos', 'grupo_user.grupo_id', 'grupos.id')
-        // ->where('grupos.nome', '=', 'cliente');
+        ->join('grupo_user', 'users.id', 'grupo_user.user_id')
+        ->join('grupos', 'grupo_user.grupo_id', 'grupos.id')
+        ->where('grupos.nome', '=', 'colaborador');
     }
 
     /**
@@ -82,7 +79,7 @@ class ColaboradorDataTable extends DataTable
     {
         return [
             Column::make('id')->title('Id'),
-            Column::make('nome')->title('Nome'),
+            Column::make('name')->title('Nome'),
             Column::make('data_nascimento')->title('Data de nascimento'),
             Column::make('telefone')->title('Telefone'),
             Column::make('email')->title('E-mail'),

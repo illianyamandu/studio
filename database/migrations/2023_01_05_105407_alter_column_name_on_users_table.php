@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('colaboradors', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('nome', 'name');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colaboradors');
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('name', 'nome');
+        });
     }
 };

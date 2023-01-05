@@ -66,7 +66,7 @@ class ColaboradorController extends Controller
 
             DB::beginTransaction();
             $data = [
-                'nome' => $request->nome,
+                'name' => $request->nome,
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'telefone' => $request->telefone,

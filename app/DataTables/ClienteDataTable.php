@@ -26,11 +26,11 @@ class ClienteDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'cliente.action')
+           //->addColumn('action', 'cliente.action')
             ->editColumn('data_nascimento', function($object){
                 return Carbon::parse($object->data_nascimento)->format('d-m-Y');
             })
-            ->setRowId('id');
+            ->setRowId('cpf');
     }
 
     /**
@@ -41,7 +41,16 @@ class ClienteDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->query()
+        ->join('grupo_user', 'users.id', 'grupo_user.user_id')
+        ->join('grupos', 'grupo_user.grupo_id', 'grupos.id')
+        ->where('grupos.nome', '=', 'cliente')
+        ->select([
+            'grupos.*',
+            'grupos.nome as nome_grupo',
+            'users.id as user_id',
+            'users.name as nome_usuario'
+        ]);
     }
 
     /**
@@ -55,9 +64,7 @@ class ClienteDataTable extends DataTable
                     ->setTableId('cliente-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle();
+                    ->select(['*']);
     }
 
     /**
@@ -68,12 +75,13 @@ class ClienteDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('Id'),
-            Column::make('nome')->title('Nome'),
-            Column::make('data_nascimento')->title('Data de nascimento'),
-            Column::make('telefone')->title('Telefone'),
-            Column::make('email')->title('E-mail'),
-            Column::make('action')->title('Ações')->searchable(false)->orderable(false)
+            Column::make('nome_grupo')->title('Nome grupo'),
+            Column::make('nome_usuario')->title('Nome usuario'),
+            // Column::make('cpf')->title('CPF'),
+            // Column::make('data_nascimento')->title('Data de nascimento'),
+            // Column::make('telefone')->title('Telefone'),
+            // Column::make('email')->title('E-mail'),
+            // Column::make('action')->title('Ações')->searchable(false)->orderable(false)
         ];
     }
 

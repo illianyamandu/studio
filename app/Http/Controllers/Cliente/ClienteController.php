@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Utils\FormReturn;
+use App\Utils\Validation;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\ClienteDataTable;
 use App\Models\User;
@@ -59,11 +60,14 @@ class ClienteController extends Controller
                 return FormReturn::ReturnError($validator->errors());
             }
 
-            
+            //VERIFICA SE CPF É VÁLIDO
+            if(!Validation::CPF($request->cpf)){
+                return FormReturn::ReturnError(['error' => ['Esse CPF não é válido']]);
+            }
 
             DB::beginTransaction();
             $data = [
-                'nome' => $request->nome,
+                'name' => $request->nome,
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'telefone' => $request->telefone,
@@ -119,15 +123,18 @@ class ClienteController extends Controller
                 ],
             );
 
-
-            
             if ($validator->fails()) {
                 return FormReturn::ReturnError($validator->errors());
             }
-    
+            
+            //VERIFICA SE CPF É VÁLIDO
+            if(!Validation::CPF($request->cpf)){
+                return FormReturn::ReturnError(['error' => ['Esse CPF não é válido']]);
+            }
+            
             DB::beginTransaction();
             $data = [
-                'nome' => $request->nome,
+                'name' => $request->nome,
                 'cpf' => $request->cpf,
                 'email' => $request->email,
                 'telefone' => $request->telefone,
@@ -138,7 +145,7 @@ class ClienteController extends Controller
                 'endereco' => $request->endereco,
             ];
             $user = User::findOrFail($id);
-
+            
             if(strcmp($user->email, $request->email) === 0){
                 unset($data['email']);
             }else{

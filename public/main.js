@@ -28,3 +28,13 @@ $(function(){
         });
     });
 });
+
+$(document).ready(function () { 
+    var $cpf = $(".cpf");
+    $cpf.mask('000.000.000-00', {reverse: true});
+});
+
+$(document).ready(function () { 
+    var $fone = $(".fone");
+    $fone.mask('00 0000-0000', {reverse: true});
+});
