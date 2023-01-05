@@ -16,12 +16,12 @@ return new class extends Migration
     public function up()
     {
         $user = User::create([
-            'nome' => 'Márcia',
-            'cpf' => '00000000000',
+            'nome' => 'Márcia Gomes Rodrigues',
+            'cpf' => '641.905.791-49',
             'rg' => '0000000',
             'endereco' => 'X',
-            'telefone' => '00000000000',
-            'data_nascimento' => '2000-01-01'
+            'telefone' => '62999292337',
+            'data_nascimento' => '1974-10-11'
         ]);
 
         $grupo = Grupo::query()->where('nome', '=', 'administrador')->first();
