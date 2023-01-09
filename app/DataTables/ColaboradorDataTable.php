@@ -25,7 +25,7 @@ class ColaboradorDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'colaborardor.action')
+            ->addColumn('action', 'colaborador.action')
             ->addColumn('grupo', function ($w){
                 if(isset($w->grupo->first()->nome)){
                     return $w->grupo->first()->nome;
@@ -37,6 +37,13 @@ class ColaboradorDataTable extends DataTable
             ->editColumn('data_nascimento', function($object){
                 return Carbon::parse($object->data_nascimento)->format('d-m-Y');
             })
+            ->editColumn('status', function($object){
+                if($object->status == 1){
+                    return '<span class="tag tag-success">Ativo</span>';
+                }
+                return '<span class="tag tag-danger">Inativo</span>';
+            })
+            ->rawColumns(['status', 'action'])
             ->setRowId('id');
     }
 
@@ -51,7 +58,15 @@ class ColaboradorDataTable extends DataTable
         return $model->query()
         ->join('grupo_user', 'users.id', 'grupo_user.user_id')
         ->join('grupos', 'grupo_user.grupo_id', 'grupos.id')
-        ->where('grupos.nome', '=', 'colaborador');
+        ->where('grupos.nome', '=', 'colaborador')
+        ->select([
+            'users.*',
+            'grupos.nome as nome_grupo',
+            'users.nome as nome',
+            'users.data_nascimento as data_nascimento',
+            'users.telefone as telefone',
+            'users.email as email',
+        ]);
     }
 
     /**
@@ -84,6 +99,7 @@ class ColaboradorDataTable extends DataTable
             Column::make('telefone')->title('Telefone'),
             Column::make('email')->title('E-mail'),
             Column::make('grupo')->title('Grupo'),
+            Column::make('status')->title('Status'),
             Column::make('action')->title('Ações')->searchable(false)->orderable(false)
         ];
     }

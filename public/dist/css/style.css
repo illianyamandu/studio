@@ -18,3 +18,26 @@ table.dataTable {
     padding: 2%;
     border-radius: 20px;
 }
+
+.tag {
+    border-radius: 3px;
+    background-color: #e5e5e5;
+    color: #303438;
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.208;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.tag-success{
+    background-color: #28A745;
+    color: white;
+}
+.tag-danger{
+    background-color: #DC3545;
+    color: white;
+}

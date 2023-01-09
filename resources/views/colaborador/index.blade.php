@@ -1,5 +1,5 @@
 @extends('dashboards.layouts.admin-dash-layout')
-@section('title', 'Lista de clientes')
+@section('title', 'Lista de colaboradores')
 
 @section('actions')
     <a data-toggle="modal" data-target="#modal-form" class="btn btn-float has-text">
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label class="text-semibold">CPF</label>
-                                <input type="text" class="form-control" name="cpf" required>
+                                <input type="text" class="form-control cpf" name="cpf" required>
                                 <span class="text-danger error-text nome_error"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="text-semibold">Telefone</label>
-                                <input type="text" class="form-control" name="telefone" required>
+                                <input type="text" class="form-control fone" name="telefone" required>
                                 <span class="text-danger error-text nome_error"></span>
                             </div>
                         </div>

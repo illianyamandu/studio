@@ -9,6 +9,7 @@ use App\Utils\FormReturn;
 use App\Utils\Validation;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\ClienteDataTable;
+use App\Models\Grupo;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -78,7 +79,10 @@ class ClienteController extends Controller
                 'endereco' => $request->endereco,
             ];
             
-            User::create($data);
+            $user = User::create($data);
+            $grupo = Grupo::where('nome', 'cliente')->first();
+            $user->grupo()->sync([$grupo->id]);
+
             DB::commit();
     
             return FormReturn::ReturnSuccess('Cliente cadastrado com sucesso!', 200);

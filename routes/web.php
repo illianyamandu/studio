@@ -45,6 +45,8 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'colaborador'], function (){
         Route::get('/', [ColaboradorController::class, 'index'])->name('colaborador.index');
         Route::post('/', [ColaboradorController::class, 'store'])->name('colaborador.create');
+        Route::put('/{colaborador_id}', [ColaboradorController::class, 'update'])->name('colaborador.update');
+        Route::delete('/{colaborador_id}', [ColaboradorController::class, 'delete'])->name('colaborador.delete');
     });
     
 });
