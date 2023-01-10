@@ -24,6 +24,18 @@ class GrupoDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'grupo.action')
+            ->editColumn('descricao', function ($object){
+                if(strlen($object->descricao) > 50){
+                    return substr($object->descricao, 0, 50) . '...';
+                }
+                return $object->descricao;
+            })
+            ->editColumn('nome', function ($object){
+                if(strlen($object->nome) > 30){
+                    return substr($object->nome, 0, 50) . '...';
+                }
+                return $object->nome;
+            })
             ->setRowId('id');
     }
 

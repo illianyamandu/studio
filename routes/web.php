@@ -23,6 +23,7 @@ Route::group(['prefix' => '/'], function () {
     })->name('index');
     Route::group(['prefix' => 'cliente'], function () {
         Route::get('/', [ClienteController::class, 'index'])->name('cliente.index');
+        Route::get('/{cliente_id}', [ClienteController::class, 'detail'])->name('cliente.detail');
         Route::post('/', [ClienteController::class, 'store'])->name('cliente.create');
         Route::put('/{cliente_id}', [ClienteController::class, 'update'])->name('cliente.update');
         Route::delete('/{cliente_id}', [ClienteController::class, 'delete'])->name('cliente.delete');

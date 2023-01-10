@@ -9,6 +9,9 @@
 </style>
 
 <div class="actions">
+<a class="btn btn-info btn-sm rounded-0" href="{{route('cliente.detail', $id)}}" type="button" title="Detalhes">
+    <i class="fa fa-address-book"></i>
+</a>
 <a class="btn btn-primary btn-sm rounded-0" data-toggle="modal" data-target="{{'#modal-'.$id}}" type="button" title="Editar">
     <i class="fa fa-pen"></i>
 </a>

@@ -93,6 +93,11 @@ class ClienteController extends Controller
         }
     }
 
+    public function detail($id){
+        $user = User::where('id', '=', $id)->first();
+        return view('cliente.detail', compact('user'));
+    }
+
 
     public function update(Request $request, $id){
         try{            
